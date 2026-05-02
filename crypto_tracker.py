@@ -98,7 +98,7 @@ with dpg.window(label="Crypto Tracker", tag="win", no_scrollbar=True):
         )
     dpg.add_spacer(height=6)
 
-    with dpg.child_window(height=180, autosize_x=True, no_scrollbar=True, tag="table"):
+    with dpg.child_window(height=190, autosize_x=True, no_scrollbar=True, tag="table"):
         with dpg.table(header_row=True):
             dpg.add_table_column(
                 label="Coin", width_fixed=True, init_width_or_weight=150
@@ -164,8 +164,9 @@ dpg.set_primary_window("win", True)
 
 def on_resize():
     vp_h = dpg.get_viewport_height()
-    dpg.configure_item("table", height=190)
-    dpg.configure_item("plot", height=vp_h - 290)
+    table_h = max(190, int(vp_h * 0.22))
+    dpg.configure_item("table", height=table_h)
+    dpg.configure_item("plot", height=vp_h - table_h - 100)
 
 
 dpg.set_viewport_resize_callback(on_resize)
