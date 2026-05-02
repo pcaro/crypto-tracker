@@ -23,7 +23,7 @@ COLORS = [
 ]
 
 MAX_POINTS = 60
-FETCH_INTERVAL = 30
+FETCH_INTERVAL = 10  # seconds
 
 # ── state ─────────────────────────────────────────────────────
 _lock = threading.Lock()
