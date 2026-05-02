@@ -25,7 +25,7 @@ Built with [Dear PyGui](https://github.com/hoffstadt/DearPyGui) and the free [Co
 
 - Python ≥ 3.14
 - [uv](https://docs.astral.sh/uv/) (package manager)
-- A display server (X11/Wayland) — Dear PyGui needs a windowing context
+- A display server (X11 or Wayland with XWayland)
 
 ## Quick start
 

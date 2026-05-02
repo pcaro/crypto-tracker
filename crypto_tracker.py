@@ -1,8 +1,38 @@
 import dearpygui.dearpygui as dpg
+import os
 import requests
+import subprocess
 import threading
 import time
 from collections import deque
+from pathlib import Path
+
+# ── XWayland auth fix ─────────────────────────────────────────
+# KDE/Wayland runs XWayland with a per-session Xauthority file.
+# GLFW (used by DearPyGui) links against X11 and needs DISPLAY
+# + XAUTHORITY to match what XWayland expects.
+def _setup_xwayland_auth():
+    if os.environ.get("XDG_SESSION_TYPE") != "wayland":
+        return
+    xauth = os.environ.get("XAUTHORITY", "")
+    if xauth and Path(xauth).exists():
+        return  # already valid
+    try:
+        out = subprocess.check_output(
+            ["ps", "-eo", "args"], text=True, timeout=3
+        )
+        for line in out.splitlines():
+            if "Xwayland" in line and "-auth" in line:
+                parts = line.split()
+                idx = parts.index("-auth")
+                xauth_path = parts[idx + 1]
+                if Path(xauth_path).exists():
+                    os.environ["XAUTHORITY"] = xauth_path
+                    return
+    except Exception:
+        pass
+
+_setup_xwayland_auth()
 
 # ── crypto config ──────────────────────────────────────────────
 COINS = {
@@ -154,9 +184,6 @@ dpg.show_viewport()
 # ── start threads ──────────────────────────────────────────────
 fetch_thread = threading.Thread(target=fetch_prices, daemon=True)
 fetch_thread.start()
-
-# ── change metric to avoid warning about timing __init__ vs time ─
-_ = time.time
 
 # ── main loop ──────────────────────────────────────────────────
 while dpg.is_dearpygui_running():
