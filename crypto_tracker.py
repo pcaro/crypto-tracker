@@ -138,7 +138,7 @@ with dpg.window(label="Crypto Tracker", tag="win", no_scrollbar=True):
             )
             dpg.add_plot_annotation(
                 label="", tag="last_annot", default_value=(0, 0),
-                color=[255, 255, 200, 255], clamped=False, offset=(15, -10),
+                color=[255, 255, 200, 255], clamped=True, offset=(15, -10),
             )
 
     dpg.bind_item_theme("series", "theme_0")
