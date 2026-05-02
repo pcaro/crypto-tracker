@@ -63,3 +63,7 @@ icon.png            — App icon
 ## License
 
 MIT
+
+---
+
+*Built as a playground to explore [Dear PyGui](https://github.com/hoffstadt/DearPyGui) GPU-accelerated UIs and [DeepSeek V4 Pro](https://deepseek.com) as an AI coding assistant.*
