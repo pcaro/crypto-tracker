@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Crypto Tracker
+Comment=Live crypto price tracker with GPU-accelerated charts
+Exec=uv run python3 crypto_tracker.py
+Path=/home/pcaro/temp/DearPyGui
+Icon=/home/pcaro/temp/DearPyGui/icon.png
+Terminal=false
+Categories=Finance;Utility;
