@@ -47,6 +47,7 @@ threading.Thread(target=_fetch_loop, daemon=True).start()
 
 # ── UI state ──────────────────────────────────────────────────
 selected = core.COINS[0][0]
+_COIN_IDX = {c[0]: i for i, c in enumerate(core.COINS)}
 
 
 def on_select(sender, app_data, user_data):
@@ -118,7 +119,6 @@ with dpg.window(label="Crypto Tracker", tag="win", no_scrollbar=True):
             )
 
             for coin_id, name, tick, _ in core.COINS:
-                idx = [c[0] for c in core.COINS].index(coin_id)
                 with dpg.table_row(tag=f"row_{coin_id}"):
                     if coin_id == selected:
                         dpg.bind_item_theme(f"row_{coin_id}", "row_selected_theme")
@@ -228,11 +228,10 @@ while dpg.is_dearpygui_running():
         # Annotation at the last point
         last_idx = len(xs) - 1
         last_time = datetime.datetime.fromtimestamp(xs[last_idx]).strftime("%H:%M")
-        sym_cur = core.currency_symbol()
         dpg.set_value("last_annot", (last_idx, ys[last_idx]))
-        dpg.set_item_label("last_annot", f"{sym_cur}{ys[last_idx]:,.2f} at {last_time}")
+        dpg.set_item_label("last_annot", f"{sym}{ys[last_idx]:,.2f} at {last_time}")
 
-    idx = [c[0] for c in core.COINS].index(selected)
+    idx = _COIN_IDX[selected]
     if idx != last_rebind:
         dpg.bind_item_theme("series", f"theme_{idx}")
         dpg.bind_item_theme("points", f"scatter_theme_{idx}")
