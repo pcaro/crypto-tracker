@@ -54,9 +54,11 @@ def on_select(sender, app_data, user_data):
     new = user_data
     if new == selected:
         return
+    dpg.bind_item_theme(f"row_{selected}", "")
     dpg.set_value(f"sel_{selected}", False)
     selected = new
     dpg.set_value(f"sel_{new}", True)
+    dpg.bind_item_theme(f"row_{new}", "row_selected_theme")
 
 
 def on_currency(sender, app_data):
@@ -69,6 +71,11 @@ dpg.create_context()
 with dpg.font_registry():
     font = dpg.add_font("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 20)
 dpg.bind_font(font)
+
+# ── row highlight themes ───────────────────────────────────────
+with dpg.theme(tag="row_selected_theme"):
+    with dpg.theme_component(dpg.mvAll):
+        dpg.add_theme_color(dpg.mvThemeCol_TableRowBg, [60, 60, 60, 255])
 
 for i, c in enumerate(core.COLORS):
     with dpg.theme(tag=f"theme_{i}"):
@@ -112,7 +119,9 @@ with dpg.window(label="Crypto Tracker", tag="win", no_scrollbar=True):
 
             for coin_id, name, tick, _ in core.COINS:
                 idx = [c[0] for c in core.COINS].index(coin_id)
-                with dpg.table_row():
+                with dpg.table_row(tag=f"row_{coin_id}"):
+                    if coin_id == selected:
+                        dpg.bind_item_theme(f"row_{coin_id}", "row_selected_theme")
                     dpg.add_selectable(
                         label=f"  {name} ({tick})",
                         tag=f"sel_{coin_id}",
