@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#16213e"/>
+    </linearGradient>
+    <linearGradient id="line1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f7931a"/>
+      <stop offset="100%" stop-color="#f7a83a"/>
+    </linearGradient>
+    <linearGradient id="line2" x1="0" y1="1" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3c82f6"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </linearGradient>
+    <linearGradient id="line3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#26c485"/>
+      <stop offset="100%" stop-color="#4ade80"/>
+    </linearGradient>
+  </defs>
+  <!-- background -->
+  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+  <!-- grid lines -->
+  <line x1="80" y1="400" x2="80" y2="100" stroke="#334155" stroke-width="3"/>
+  <line x1="80" y1="400" x2="432" y2="400" stroke="#334155" stroke-width="3"/>
+  <line x1="80" y1="325" x2="432" y2="325" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="80" y1="250" x2="432" y2="250" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="80" y1="175" x2="432" y2="175" stroke="#1e293b" stroke-width="1.5"/>
+  <!-- BTC line (orange) -->
+  <polyline points="80,310 150,280 220,250 290,230 360,210 432,220" fill="none" stroke="url(#line1)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- ETH line (blue) -->
+  <polyline points="80,340 150,300 220,320 290,260 360,280 432,240" fill="none" stroke="url(#line2)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- XRP/SOL line (green) -->
+  <polyline points="80,360 150,350 220,310 290,340 360,300 432,290" fill="none" stroke="url(#line3)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- dots on lines -->
+  <circle cx="432" cy="220" r="7" fill="#f7931a"/>
+  <circle cx="432" cy="240" r="7" fill="#3c82f6"/>
+  <circle cx="432" cy="290" r="7" fill="#26c485"/>
+</svg>
